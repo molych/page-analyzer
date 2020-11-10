@@ -14,8 +14,5 @@ use App\Http\Controllers\DomainController;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
-
-Route::resource('domains', DomainController::class)->except(['destroy']);;
+Route::resource('domains', DomainController::class)->except(['destroy', 'create']);;
+Route::get('/', [DomainController::class, 'create'])->name('domains.create');

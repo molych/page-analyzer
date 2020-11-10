@@ -20,10 +20,10 @@ deploy:
 	git push heroku
 
 lint:
-	composer exec --verbose phpcs -- --standard=PSR12 app public resources
+	composer exec --verbose phpcs -- --standard=PSR12 app resources
 
 lint-fix:
-	composer exec --verbose phpcbf -- --standard=PSR12 app public resources
+	composer exec --verbose phpcbf -- --standard=PSR12 app resources
 
 install:
 	composer install

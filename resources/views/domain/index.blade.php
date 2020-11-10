@@ -12,17 +12,19 @@
                     <th>Last check</th>
                     <th>Status Code</th>
                 </tr>
-                <tr>
-                    @foreach($domains as $domain)
+               
+                @if($domains ?? '')
+                    @foreach($domains ?? '' as $domain)
+                    <tr>
                         <td>{{ $domain->id }}</td>
-                        <td><a href="/domains/{{$domain->id}}">{{ $domain->name }}</a></td>
-                        <td>{{ $domain->update_at }} </td>
-                        <td>200</td>
+                        <td><a href="{{route('domains.show', $domain->id)}}">{{ $domain->name }}</a></td>
+                        <td>{{ $domain->updated_at }} </td>
+                        <td></td>
+                    </tr>    
                     @endforeach
-                </tr>
+                @endif
             </tbody>
         </table>
     </div>
 </div>
-
 @endsection
