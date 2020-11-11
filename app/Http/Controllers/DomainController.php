@@ -44,10 +44,8 @@ class DomainController extends Controller
         ]);
 
         if ($validator->fails()) {
-            flash('You have been added domain')->error();
-            return redirect()
-                        ->route('domains.create')
-                        ->withErrors('url is not valid');
+            flash('url is not valid')->error();
+            return redirect()->route('domains.create');
         }
 
         $parsedUrl = parse_url($url['name']);
@@ -56,8 +54,7 @@ class DomainController extends Controller
         $created_at = Carbon::now()->toDateTimeString();
 
         $query = DB::table('domains')->where('name', $parsedUrl)->get()->first();
-      
-        if ($query ) {
+        if ($query) {
             flash('Domain already exists')->info();
             return redirect()->route('domains.show', $query->id);
         }
