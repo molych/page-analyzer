@@ -28,11 +28,12 @@
         </table>
     </div>
     <h2 class="mt-5 mb-3">Checks</h2>
-    <form method="post" action="{{route('domains.edit', $domain->id)}}">
+    <form method="post" action="{{route('domains.check', $domain->id)}}">
         @csrf       
     <input type="submit" class="btn btn-primary" value="Run check">
     </form>
-    <table class="table table-bordered table-hover text-nowrap">
+  
+    <table class="table table-bordered table-hover text-wrap">
         <tbody>
             <tr>
                 <th>Id</th>
@@ -42,16 +43,17 @@
                 <th>Description</th>
                 <th>Created At</th>
             </tr>
+            @foreach ($domainChecks as $check)
             <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
+                <td>{{$check->id}}</td>
+                <td>{{$check->status_code}}</td>
+                <td>{{$check->h1}}</td>
+                <td>{{$check->keywords}}</td>
+                <td>{{$check->description}}</td>
+                <td>{{$check->created_at}}</td>   
+            @endforeach
         </tbody>
     </table>
+    
 </div>
-
 @endsection

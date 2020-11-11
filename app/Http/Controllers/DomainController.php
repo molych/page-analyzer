@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Http;
+use DiDom\Document;
 
 class DomainController extends Controller
 {
@@ -16,7 +18,7 @@ class DomainController extends Controller
      */
     public function index()
     {
-        $domains = DB::table('domains')->paginate();
+        $domains = DB::table('domains')->paginate(50);
         return view('domain.index', compact('domains'));
     }
 
@@ -78,7 +80,8 @@ class DomainController extends Controller
     public function show($id)
     {
         $domain = DB::table('domains')->find($id);
-        return view('domain.show', compact('domain'));
+        $domainChecks = DB::table('domain_checks')->where('domain_id', $id)->paginate();
+        return view('domain.show', compact('domain', 'domainChecks'));
     }
     /**
      * Show the form for editing the specified resource.
@@ -86,31 +89,30 @@ class DomainController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function check($id)
     {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        $domain = DB::table('domains')->find($id);
+        $name = $domain->name;
+        $statusCode = Http::get($name)->status();
+        $updated_at = Carbon::now()->toDateTimeString();
+        $created_at = Carbon::now()->toDateTimeString();
+        $document = new Document($name, true);
+        $keywords = $document->first('meta[name=keywords]');
+        $keywordsContent = $keywords ? $keywords->getAttribute('content') : '';
+        $description = $document->first('meta[name=description]');
+        $descriptionContent = $description ? $description->getAttribute('content') : '';
+        $h1 = $document->first('h1');
+        $h1Text = $h1 ? $h1->text() : '';
+        $row = DB::table('domain_checks')->insertGetId([
+            'domain_id' => $id,
+            'status_code' => $statusCode,
+            'h1' => $h1Text,
+            'keywords' => $keywordsContent,
+            'description' => $descriptionContent,
+            'updated_at' => $updated_at,
+            'created_at' => $created_at,
+            ]);
+        flash('Website has been checked!')->success();
+        return redirect()->route('domains.show', $id);
     }
 }
