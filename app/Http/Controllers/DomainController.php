@@ -80,7 +80,11 @@ class DomainController extends Controller
     public function show($id)
     {
         $domain = DB::table('domains')->find($id);
-        $domainChecks = DB::table('domain_checks')->where('domain_id', $id)->paginate();
+        $domainChecks = DB::table('domain_checks')
+            ->where('domain_id', $id)
+            ->orderByDesc('created_at')
+            ->get();
+            
         return view('domain.show', compact('domain', 'domainChecks'));
     }
     /**
@@ -98,11 +102,11 @@ class DomainController extends Controller
         $created_at = Carbon::now()->toDateTimeString();
         $document = new Document($name, true);
         $keywords = $document->first('meta[name=keywords]');
-        $keywordsContent = $keywords ? $keywords->getAttribute('content') : '';
+        $keywordsContent = $keywords ? $keywords->getAttribute('content') : null;
         $description = $document->first('meta[name=description]');
-        $descriptionContent = $description ? $description->getAttribute('content') : '';
+        $descriptionContent = $description ? $description->getAttribute('content') : null;
         $h1 = $document->first('h1');
-        $h1Text = $h1 ? $h1->text() : '';
+        $h1Text = $h1 ? $h1->text() : null;
         $row = DB::table('domain_checks')->insertGetId([
             'domain_id' => $id,
             'status_code' => $statusCode,

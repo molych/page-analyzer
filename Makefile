@@ -4,6 +4,9 @@ start:
 migrate:
 	php artisan migrate
 
+heroku migrate:
+	heroku run php artisan migrate
+
 console:
 	php artisan tinker
 
@@ -28,3 +31,5 @@ lint-fix:
 install:
 	composer install
 
+restart:
+	heroku restart -a webpage-analyzer
