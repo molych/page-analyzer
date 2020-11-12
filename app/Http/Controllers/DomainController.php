@@ -52,17 +52,18 @@ class DomainController extends Controller
 
         $parsedUrl = parse_url($url['name']);
         $parsedUrl = "{$parsedUrl['scheme']}://{$parsedUrl['host']}";
+        $lowUrl = strtolower($parsedUrl);
         $updated_at = Carbon::now()->toDateTimeString();
         $created_at = Carbon::now()->toDateTimeString();
 
-        $query = DB::table('domains')->where('name', $parsedUrl)->get()->first();
+        $query = DB::table('domains')->where('name', $lowUrl)->get()->first();
         if ($query) {
             flash('Domain already exists')->info();
             return redirect()->route('domains.show', $query->id);
         }
 
         $id = DB::table('domains')->insertGetId([
-            'name' => $parsedUrl,
+            'name' => $lowUrl,
             'updated_at' => $updated_at,
             'created_at' => $created_at
             ]);
