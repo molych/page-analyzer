@@ -14,6 +14,7 @@ use App\Http\Controllers\DomainController;
 |
 */
 
-Route::resource('domains', DomainController::class)->only(['index', 'store', 'show']);;
+Route::resource('domains', DomainController::class)->only(['index', 'store', 'show']);
+;
 Route::get('/', [DomainController::class, 'create'])->name('domains.create');
 Route::post('/domains/{id}/check', [DomainController::class, 'check'])->name('domains.check');

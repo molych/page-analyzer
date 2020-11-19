@@ -85,7 +85,7 @@ class DomainController extends Controller
             ->where('domain_id', $id)
             ->orderByDesc('created_at')
             ->get();
-            
+
         return view('domain.show', compact('domain', 'domainChecks'));
     }
     /**
