@@ -33,3 +33,6 @@ install:
 
 restart:
 	heroku restart -a webpage-analyzer
+
+test-ci:
+	composer run-script phpunit tests -- --coverage-clover ./build/logs/clover.xml
