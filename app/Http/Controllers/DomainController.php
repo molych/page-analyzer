@@ -18,8 +18,15 @@ class DomainController extends Controller
      */
     public function index()
     {
-        $domains = DB::table('domains')->paginate(50);
-        return view('domain.index', compact('domains'));
+        $domains = DB::table('domains')->get();
+        $lastChecks = DB::table('domain_checks')
+        ->select('domain_id', 'created_at', 'status_code')
+        ->orderBy('domain_id')
+        ->orderByDesc('created_at')
+        ->distinct('domain_id')
+        ->get()
+        ->keyBy('domain_id');
+        return view('domain.index', compact('domains', 'lastChecks'));
     }
 
     /**
