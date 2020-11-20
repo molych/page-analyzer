@@ -24,12 +24,12 @@ jobs:
       - name: Run linter
         run: make lint
 
-      - name: Execute tests (Unit and Feature tests) via PHPUnit
-        run: make test
-    
-      - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v1
+      - name: Run test & publish code coverage
+        uses: paambaati/codeclimate-action@v2.6.0
+        # Add Code Climate secret key
+        env:
+          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
         with:
-          token: ${{ secrets.CC_TEST_REPORTER_ID}}
-          file: ./build/logs/clover.xml
-          fail_ci_if_error: true
+          coverageCommand: make test-coverage
+          coverageLocations: ${{github.workplace}}/build/logs/clover.xml:clover
+          debug: true
