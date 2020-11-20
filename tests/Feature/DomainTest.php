@@ -13,15 +13,15 @@ use Illuminate\Support\Facades\Http;
 class DomainTest extends TestCase
 {
     use RefreshDatabase;
-   
+
     private $id;
     private $url = 'http://www.google.com';
 
-    protected function  setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
 
-        
+
 
         $this->id = DB::table('domains')->insertGetId(
             [
