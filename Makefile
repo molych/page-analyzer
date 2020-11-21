@@ -35,4 +35,4 @@ restart:
 	heroku restart -a webpage-analyzer
 
 test-coverage:
-	composer exec --verbose phpunit tests -- --coverage-clover build/logs/clover.xml
+	composer phpunit tests -- --coverage-clover build/logs/clover.xml
