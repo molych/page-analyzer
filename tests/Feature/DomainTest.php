@@ -21,8 +21,6 @@ class DomainTest extends TestCase
     {
         parent::setUp();
 
-
-
         $this->id = DB::table('domains')->insertGetId(
             [
                 'name' => $this->url,
@@ -30,20 +28,7 @@ class DomainTest extends TestCase
                 'updated_at' =>  Carbon::now()
             ]
         );
-
-        DB::table('domain_checks')->insert(
-            [
-                'domain_id' => $this->id,
-                'status_code' => 200,
-                'h1' => null,
-                'keywords' => null,
-                'description' => null,
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now()
-            ]
-        );
     }
-
 
     public function testIndex()
     {
@@ -77,17 +62,19 @@ class DomainTest extends TestCase
 
     public function testCheck()
     {
-        $testHtml = file_get_contents(realpath(__DIR__ . '/../fixtures/test.html'));
+        $testHtml = file_get_contents(__DIR__ . '/../fixtures/test.html');
+
         Http::fake([
             $this->url => Http::response($testHtml, 200)
         ]);
+
         $response = $this->post(route('domains.check', ['id' => $this->id]));
         $response->assertSessionHasNoErrors();
         $response->assertRedirect();
 
         $this->assertDatabaseHas('domain_checks', [
             'h1' => 'test h1',
-            'description' => 'test description'
+            'description' => 'description'
         ]);
     }
 }

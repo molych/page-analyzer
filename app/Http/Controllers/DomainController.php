@@ -104,11 +104,12 @@ class DomainController extends Controller
     public function check($id)
     {
         $domain = DB::table('domains')->find($id);
-        $name = $domain->name;
-        $statusCode = Http::get($name)->status();
+        $data = Http::get($domain->name);
+        $responseBody = $data->body();
+        $statusCode = $data->status();
         $updated_at = Carbon::now()->toDateTimeString();
         $created_at = Carbon::now()->toDateTimeString();
-        $document = new Document($name, true);
+        $document = new Document($responseBody);
         $keywords = $document->first('meta[name=keywords]');
         $keywordsContent = $keywords ? $keywords->getAttribute('content') : null;
         $description = $document->first('meta[name=description]');
