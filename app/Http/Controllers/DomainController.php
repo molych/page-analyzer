@@ -105,19 +105,19 @@ class DomainController extends Controller
     {
         $domain = DB::table('domains')->find($id);
         try {
-        $data = Http::get($domain->name);
-        $responseBody = $data->body();
-        $statusCode = $data->status();
-        $updated_at = Carbon::now()->toDateTimeString();
-        $created_at = Carbon::now()->toDateTimeString();
-        $document = new Document($responseBody);
-        $keywords = $document->first('meta[name=keywords]');
-        $keywordsContent = $keywords ? $keywords->getAttribute('content') : null;
-        $description = $document->first('meta[name=description]');
-        $descriptionContent = $description ? $description->getAttribute('content') : null;
-        $h1 = $document->first('h1');
-        $h1Text = $h1 ? $h1->text() : null;
-        DB::table('domain_checks')->insertGetId([
+            $data = Http::get($domain->name);
+            $responseBody = $data->body();
+            $statusCode = $data->status();
+            $updated_at = Carbon::now()->toDateTimeString();
+            $created_at = Carbon::now()->toDateTimeString();
+            $document = new Document($responseBody);
+            $keywords = $document->first('meta[name=keywords]');
+            $keywordsContent = $keywords ? $keywords->getAttribute('content') : null;
+            $description = $document->first('meta[name=description]');
+            $descriptionContent = $description ? $description->getAttribute('content') : null;
+            $h1 = $document->first('h1');
+            $h1Text = $h1 ? $h1->text() : null;
+            DB::table('domain_checks')->insertGetId([
             'domain_id' => $id,
             'status_code' => $statusCode,
             'h1' => $h1Text,
@@ -126,8 +126,8 @@ class DomainController extends Controller
             'updated_at' => $updated_at,
             'created_at' => $created_at,
             ]);
-        flash('Website has been checked!')->success();
-        } catch  (\Exception $e) {
+            flash('Website has been checked!')->success();
+        } catch (\Exception $e) {
             flash('Website has not been checked!')->error();
         }
         return redirect()->route('domains.show', $id);
