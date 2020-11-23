@@ -1,5 +1,5 @@
 
-name: analyzer
+name: PHP-CI
 
 on:
   - push
