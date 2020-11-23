@@ -104,6 +104,7 @@ class DomainController extends Controller
     public function check($id)
     {
         $domain = DB::table('domains')->find($id);
+        try {
         $data = Http::get($domain->name);
         $responseBody = $data->body();
         $statusCode = $data->status();
@@ -116,7 +117,7 @@ class DomainController extends Controller
         $descriptionContent = $description ? $description->getAttribute('content') : null;
         $h1 = $document->first('h1');
         $h1Text = $h1 ? $h1->text() : null;
-        $row = DB::table('domain_checks')->insertGetId([
+        DB::table('domain_checks')->insertGetId([
             'domain_id' => $id,
             'status_code' => $statusCode,
             'h1' => $h1Text,
@@ -126,6 +127,9 @@ class DomainController extends Controller
             'created_at' => $created_at,
             ]);
         flash('Website has been checked!')->success();
+        } catch  (\Exception $e) {
+            flash('Website has not been checked!')->error();
+        }
         return redirect()->route('domains.show', $id);
     }
 }
