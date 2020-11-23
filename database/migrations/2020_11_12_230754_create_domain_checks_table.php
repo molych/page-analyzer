@@ -20,8 +20,8 @@ class CreateDomainChecksTable extends Migration
             $table->text('h1')->nullable();
             $table->text('keywords')->nullable();
             $table->text('description')->nullable();
-            $table->timestamp('updated_at');
-            $table->timestamp('created_at');
+            $table->timestamp('updated_at')->nullable(false);
+            $table->timestamp('created_at')->nullable(false);;
         });
     }
 
