@@ -32,6 +32,10 @@ class DomainCheckTest extends TestCase
     {
         $testHtml = file_get_contents(__DIR__ . '/../fixtures/test.html');
 
+        if ($testHtml === false) {
+            throw new \Exception('Wrong fixtures file');
+        }
+
         Http::fake([
             $this->url => Http::response($testHtml, 200)
         ]);
