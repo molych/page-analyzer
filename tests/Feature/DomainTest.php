@@ -58,23 +58,4 @@ class DomainTest extends TestCase
         $response->assertStatus(302);
         $this->assertDatabaseHas('domains', $domain['domain']);
     }
-
-
-    public function testCheck()
-    {
-        $testHtml = file_get_contents(__DIR__ . '/../fixtures/test.html');
-
-        Http::fake([
-            $this->url => Http::response($testHtml, 200)
-        ]);
-
-        $response = $this->post(route('domains.check', ['id' => $this->id]));
-        $response->assertSessionHasNoErrors();
-        $response->assertRedirect();
-
-        $this->assertDatabaseHas('domain_checks', [
-            'h1' => 'test h1',
-            'description' => 'description'
-        ]);
-    }
 }
