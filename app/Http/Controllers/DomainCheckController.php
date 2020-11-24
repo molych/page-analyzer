@@ -14,7 +14,7 @@ class DomainCheckController extends Controller
     {
         $domain = DB::table('domains')->find($id);
 
-        if(!$domain) {
+        if (!$domain->name) {
             abort(404);
         }
 
