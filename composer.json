@@ -20,7 +20,8 @@
         "laravel/ui": "^3.1",
         "nesbot/carbon": "^2.41",
         "symfony/console": "^5.1",
-        "symfony/process": "^5.1"
+        "symfony/process": "^5.1",
+        "symfony/string": "^5.1"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
