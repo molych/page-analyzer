@@ -2,17 +2,13 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use Faker\Factory;
-use Illuminate\Support\Facades\Http;
 
 class DomainTest extends TestCase
 {
-    use RefreshDatabase;
 
     private $id;
     private $url = 'http://www.google.com';
