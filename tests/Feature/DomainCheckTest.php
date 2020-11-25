@@ -32,6 +32,8 @@ class DomainCheckTest extends TestCase
     {
         $testHtml = file_get_contents(__DIR__ . '/../fixtures/test.html');
 
+        dd($testHtml);
+
         if ($testHtml === false) {
             throw new \Exception('Wrong fixtures file');
         }
