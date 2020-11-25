@@ -14,12 +14,15 @@ class DomainCheckController extends Controller
     {
         $domain = DB::table('domains')->find($id);
 
-        dd($domain);
-
         abort_unless($domain, 404);
 
         try {
-            $data = Http::get($domain->name);
+            $data  = Http::get($domain->name);
+        } catch (\Exception $e) {
+            flash($e->getMessage())->error();
+            return redirect()->route('domains.show', $id);
+        }
+
             $responseBody = $data->body();
             $statusCode = $data->status();
             $updated_at = Carbon::now()->toDateTimeString();
@@ -41,9 +44,7 @@ class DomainCheckController extends Controller
             'created_at' => $created_at,
             ]);
             flash('Website has been checked!')->success();
-        } catch (\Exception $e) {
-            flash('Website has not been checked!')->error();
-        }
+
         return redirect()->route('domains.show', $id);
     }
 }
