@@ -2,7 +2,6 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
@@ -10,8 +9,6 @@ use Illuminate\Support\Facades\Http;
 
 class DomainCheckTest extends TestCase
 {
-    use RefreshDatabase;
-
     private $id;
     private $url = 'http://www.google.com';
 
