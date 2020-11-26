@@ -20,4 +20,4 @@ Route::get('/', function () {
 });
 
 Route::resource('domains', DomainController::class)->only(['index', 'store', 'show']);
-Route::resource('/domains/{id}/check', DomainCheckController::class)->only(['store']);
+Route::resource('domains.check', DomainCheckController::class)->only(['store']);
