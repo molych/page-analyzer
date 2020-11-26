@@ -37,7 +37,7 @@ class DomainCheckTest extends TestCase
             $this->url => Http::response($testHtml, 200)
         ]);
 
-        $response = $this->post(route('domainChecks.store', ['id' => $this->id]));
+        $response = $this->post(route('check.store', ['id' => $this->id]));
         $response->assertSessionHasNoErrors();
         $response->assertRedirect();
 

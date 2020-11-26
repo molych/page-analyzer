@@ -25,10 +25,6 @@ class DomainController extends Controller
         ->get()
         ->keyBy('domain_id');
 
-        if (!$domains) {
-            flash('Domain list is empty')->info();
-            return view('index');
-        }
         return view('domain.index', compact('domains', 'lastChecks'));
     }
 

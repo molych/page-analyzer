@@ -9,6 +9,7 @@ use Faker\Factory;
 
 class DomainTest extends TestCase
 {
+    
 
     private $id;
     private $url = 'http://www.google.com';
@@ -29,12 +30,6 @@ class DomainTest extends TestCase
     public function testIndex()
     {
         $response = $this->get(route('domains.index'));
-        $response->assertOk();
-    }
-
-    public function testCreate()
-    {
-        $response = $this->get(route('domains.create'));
         $response->assertOk();
     }
 
