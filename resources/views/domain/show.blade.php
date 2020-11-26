@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-@include('flash::message')
+
 
 <div class="container-lg">
     <h1 class="mt-5 mb-3">{{ $domain->name }}</h1>
@@ -28,7 +28,7 @@
         </table>
     </div>
     <h2 class="mt-5 mb-3">Checks</h2>
-    <form method="post" action="{{route('domainChecks.store', $domain->id)}}">
+    <form method="post" action="{{route('check.store', $domain->id)}}">
         @csrf       
     <input type="submit" class="btn btn-primary" value="Run check">
     </form>

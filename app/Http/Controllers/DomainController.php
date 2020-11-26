@@ -24,18 +24,14 @@ class DomainController extends Controller
         ->distinct('domain_id')
         ->get()
         ->keyBy('domain_id');
+
+        if (!$domains) {
+            flash('Domain list is empty')->info();
+            return view('index');
+        }
         return view('domain.index', compact('domains', 'lastChecks'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        return view('index');
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -52,25 +48,23 @@ class DomainController extends Controller
 
         if ($validator->fails()) {
             flash('url is not valid')->error();
-            return redirect()->route('domains.create');
+            return view('index');
         }
 
         $parsedUrl = parse_url($url['name']);
         $parsedUrl = "{$parsedUrl['scheme']}://{$parsedUrl['host']}";
         $lowUrl = strtolower($parsedUrl);
-        $updated_at = Carbon::now()->toDateTimeString();
-        $created_at = Carbon::now()->toDateTimeString();
 
-        $query = DB::table('domains')->where('name', $lowUrl)->get()->first();
-        if ($query) {
+        $domainExists = DB::table('domains')->where('name', $lowUrl)->get()->first();
+        if ($domainExists) {
             flash('Domain already exists')->info();
-            return redirect()->route('domains.show', $query->id);
+            return redirect()->route('domains.show', $domainExists->id);
         }
 
         $id = DB::table('domains')->insertGetId([
             'name' => $lowUrl,
-            'updated_at' => $updated_at,
-            'created_at' => $created_at
+            'updated_at' => Carbon::now()->toDateTimeString(),
+            'created_at' => Carbon::now()->toDateTimeString()
             ]);
         flash('Url has been added')->success();
 

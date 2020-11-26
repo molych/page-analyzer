@@ -15,6 +15,9 @@ use App\Http\Controllers\DomainCheckController;
 |
 */
 
+Route::get('/', function () {
+    return view('index');
+});
+
 Route::resource('domains', DomainController::class)->only(['index', 'store', 'show']);
-Route::get('/', [DomainController::class, 'create'])->name('domains.create');
-Route::post('/domains/{id}/check', [DomainCheckController::class, 'store'])->name('domainChecks.store');
+Route::resource('/domains/{id}/check', DomainCheckController::class)->only(['store']);
