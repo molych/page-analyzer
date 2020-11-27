@@ -24,7 +24,6 @@ class DomainController extends Controller
         ->distinct('domain_id')
         ->get()
         ->keyBy('domain_id');
-
         return view('domain.index', compact('domains', 'lastChecks'));
     }
 
@@ -41,29 +40,24 @@ class DomainController extends Controller
         $validator = Validator::make($url, [
             'name' => 'required|url',
         ]);
-
         if ($validator->fails()) {
             flash('url is not valid')->error();
             return view('index');
         }
-
         $parsedUrl = parse_url($url['name']);
         $parsedUrl = "{$parsedUrl['scheme']}://{$parsedUrl['host']}";
         $lowUrl = strtolower($parsedUrl);
-
         $domainExists = DB::table('domains')->where('name', $lowUrl)->get()->first();
         if ($domainExists) {
             flash('Domain already exists')->info();
             return redirect()->route('domains.show', $domainExists->id);
         }
-
         $id = DB::table('domains')->insertGetId([
             'name' => $lowUrl,
             'updated_at' => Carbon::now()->toDateTimeString(),
             'created_at' => Carbon::now()->toDateTimeString()
             ]);
         flash('Url has been added')->success();
-
         return redirect()->route('domains.show', $id);
     }
 
@@ -80,7 +74,6 @@ class DomainController extends Controller
             ->where('domain_id', $id)
             ->orderByDesc('created_at')
             ->get();
-
         return view('domain.show', compact('domain', 'domainChecks'));
     }
 }

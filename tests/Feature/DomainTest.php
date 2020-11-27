@@ -9,8 +9,6 @@ use Faker\Factory;
 
 class DomainTest extends TestCase
 {
-
-
     private $id;
     private $url = 'http://www.google.com';
 

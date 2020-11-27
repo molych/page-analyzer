@@ -28,22 +28,19 @@ class DomainCheckTest extends TestCase
     public function testStore()
     {
         $testHtml = file_get_contents(__DIR__ . '/../fixtures/test.html');
-
         if ($testHtml === false) {
             throw new \Exception('Wrong fixtures file');
         }
-
         Http::fake([
             $this->url => Http::response($testHtml, 200)
         ]);
-
         $response = $this->post(route('check.store', ['id' => $this->id]));
         $response->assertSessionHasNoErrors();
         $response->assertRedirect();
-
         $this->assertDatabaseHas('domain_checks', [
             'h1' => 'test h1',
-            'description' => 'description'
+            'description' => 'description',
+            'keywords' => 'test keywords'
         ]);
     }
 }

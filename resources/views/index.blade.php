@@ -1,7 +1,5 @@
 @extends('layouts.app')
-
 @section('content')
-
 <div class="jumbotron jumbotron-fluid bg-dark">
     <div class="container-lg">
         <div class="row">
