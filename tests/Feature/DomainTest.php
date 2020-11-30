@@ -19,8 +19,8 @@ class DomainTest extends TestCase
         $this->id = DB::table('domains')->insertGetId(
             [
                 'name' => $this->url,
-                'created_at' =>  Carbon::now(),
-                'updated_at' =>  Carbon::now()
+                'created_at' =>  Carbon::now()->toDateTimeString(),
+                'updated_at' =>  Carbon::now()->toDateTimeString()
             ]
         );
     }

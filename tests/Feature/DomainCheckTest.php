@@ -19,8 +19,8 @@ class DomainCheckTest extends TestCase
         $this->id = DB::table('domains')->insertGetId(
             [
                 'name' => $this->url,
-                'created_at' =>  Carbon::now(),
-                'updated_at' =>  Carbon::now()
+                'created_at' =>  Carbon::now()->toDateTimeString(),
+                'updated_at' =>  Carbon::now()->toDateTimeString()
             ]
         );
     }
@@ -34,7 +34,7 @@ class DomainCheckTest extends TestCase
         Http::fake([
             $this->url => Http::response($testHtml, 200)
         ]);
-        $response = $this->post(route('check.store', ['id' => $this->id]));
+        $response = $this->post(route('domains.check.store', $this->id));
         $response->assertSessionHasNoErrors();
         $response->assertRedirect();
         $this->assertDatabaseHas('domain_checks', [

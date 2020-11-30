@@ -18,12 +18,12 @@ class DomainController extends Controller
     {
         $domains = DB::table('domains')->get();
         $lastChecks = DB::table('domain_checks')
-        ->select('domain_id', 'created_at', 'status_code')
-        ->orderBy('domain_id')
-        ->orderByDesc('created_at')
-        ->distinct('domain_id')
-        ->get()
-        ->keyBy('domain_id');
+            ->select('domain_id', 'created_at', 'status_code')
+            ->orderBy('domain_id')
+            ->orderByDesc('created_at')
+            ->distinct('domain_id')
+            ->get()
+            ->keyBy('domain_id');
         return view('domain.index', compact('domains', 'lastChecks'));
     }
 
