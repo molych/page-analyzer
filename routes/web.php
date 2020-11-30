@@ -17,7 +17,7 @@ use App\Http\Controllers\DomainCheckController;
 
 Route::get('/', function () {
     return view('index');
-});
+})->name('home');
 
 Route::resource('domains', DomainController::class)->only(['index', 'store', 'show']);
 Route::resource('domains.check', DomainCheckController::class)->only(['store']);
