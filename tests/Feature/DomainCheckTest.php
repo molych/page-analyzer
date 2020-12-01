@@ -35,12 +35,13 @@ class DomainCheckTest extends TestCase
             $this->url => Http::response($testHtml, 200)
         ]);
         $response = $this->post(route('domains.check.store', $this->id));
-        $response->assertSessionHasNoErrors();
-        $response->assertRedirect();
+        $response->assertRedirect(route('domains.show', $this->id));
         $this->assertDatabaseHas('domain_checks', [
+            'domain_id' => $this->id,
+            'status_code' => 200,
             'h1' => 'test h1',
-            'description' => 'description',
-            'keywords' => 'test keywords'
+            'keywords' => 'test keywords',
+            'description' => 'description'
         ]);
     }
 }
