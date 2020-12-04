@@ -11,6 +11,7 @@ class DomainTest extends TestCase
 {
     private int $id;
     private string $url = 'http://www.google.com';
+    private array $domain = [];
 
     protected function setUp(): void
     {
@@ -58,8 +59,8 @@ class DomainTest extends TestCase
 
     public function testStore()
     {
-        $domain['name'] = Factory::create()->url;
-        $parsedName = parse_url($domain['name']);
+        $this->domain['name'] = Factory::create()->url;
+        $parsedName = parse_url($this->domain['name']);
         $domain['domain']['name'] = "{$parsedName['scheme']}://{$parsedName['host']}";
         $response = $this->post(route('domains.store'), $domain);
         $response->assertSessionHasNoErrors();
