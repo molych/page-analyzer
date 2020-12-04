@@ -25,6 +25,12 @@ class DomainTest extends TestCase
         );
     }
 
+     /**
+     * Display the specified resource.
+     *
+     * @return void
+     */
+
     public function testIndex()
     {
         $response = $this->get(route('domains.index'));
