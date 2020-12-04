@@ -12,8 +12,7 @@ class DomainTest extends TestCase
     /**
      * A domain test.
      *
-     * @param  int  $this->id
-     * @param string $this->$url
+     * 
      * @return void
      */
 
