@@ -16,12 +16,14 @@ class CreateDomainChecksTable extends Migration
         Schema::create('domain_checks', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->smallInteger('domain_id');
-            $table->smallInteger('status_code')->nullable();;
+            $table->smallInteger('status_code')->nullable();
+            ;
             $table->text('h1')->nullable();
             $table->text('keywords')->nullable();
             $table->text('description')->nullable();
             $table->timestamp('updated_at')->nullable();
-            $table->timestamp('created_at')->nullable();;
+            $table->timestamp('created_at')->nullable();
+            ;
         });
     }
 

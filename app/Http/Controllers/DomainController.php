@@ -41,16 +41,16 @@ class DomainController extends Controller
             'name' => 'required|url',
         ]);
         if ($validator->fails()) {
-            flash('url is not valid')->error();
-            return view('index');
+            flash('Url is not valid')->error();
+            return redirect()->back()->withInput($url)->withErrors($validator->errors());
         }
         $parsedUrl = parse_url($url['name']);
         $parsedUrl = "{$parsedUrl['scheme']}://{$parsedUrl['host']}";
         $lowUrl = strtolower($parsedUrl);
-        $domainExists = DB::table('domains')->where('name', $lowUrl)->get()->first();
-        if ($domainExists) {
+        $domainName = DB::table('domains')->where('name', $lowUrl)->get()->first();
+        if ($domainName) {
             flash('Domain already exists')->info();
-            return redirect()->route('domains.show', $domainExists->id);
+            return redirect()->route('domains.show', $domainName->id);
         }
         $id = DB::table('domains')->insertGetId([
             'name' => $lowUrl,

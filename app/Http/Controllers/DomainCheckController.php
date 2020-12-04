@@ -14,13 +14,13 @@ class DomainCheckController extends Controller
         $domain = DB::table('domains')->find($id);
         abort_unless($domain, 404);
         try {
-            $data  = Http::get($domain->name);
+            $response  = Http::get($domain->name);
         } catch (\Exception $e) {
             flash($e->getMessage())->error();
             return redirect()->route('domains.show', $id);
         }
-        $responseBody = $data->body();
-        $statusCode = $data->status();
+        $responseBody = $response->body();
+        $statusCode = $response->status();
         $document = new Document($responseBody);
         $keywords = optional($document->first('meta[name=keywords]'))->getAttribute('content');
         $description = optional($document->first('meta[name=description]'))->getAttribute('content');

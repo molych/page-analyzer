@@ -35,6 +35,7 @@ class DomainTest extends TestCase
     {
         $response = $this->get(route('domains.show', $this->id));
         $response->assertOk();
+        $response->assertSee($this->url);
     }
 
     public function testStore()

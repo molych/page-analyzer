@@ -34,7 +34,7 @@ class DomainCheckTest extends TestCase
         Http::fake([
             $this->url => Http::response($testHtml, 200)
         ]);
-        $response = $this->post(route('domains.check.store', $this->id));
+        $response = $this->post(route('domains.checks.store', $this->id));
         $response->assertRedirect(route('domains.show', $this->id));
         $this->assertDatabaseHas('domain_checks', [
             'domain_id' => $this->id,
