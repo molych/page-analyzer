@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DomainController;
 use App\Http\Controllers\DomainCheckController;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,11 +17,6 @@ use App\Http\Controllers\DomainCheckController;
 */
 
 
-
-Route::get('/', function () {
-    /** @return \Illuminate\View\View*/
-    return  view('index');
-})->name('home');
-
+Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::resource('domains', DomainController::class)->only(['index', 'store', 'show']);
 Route::resource('domains.checks', DomainCheckController::class)->only(['store']);
