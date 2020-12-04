@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DomainController;
 use App\Http\Controllers\DomainCheckController;
+use Illuminate\View\View;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,12 +15,6 @@ use App\Http\Controllers\DomainCheckController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-    /**
-     *
-     *
-     * @return \Illuminate\View\View
-     */
 
 Route::get('/', function () {
     return view('index');
