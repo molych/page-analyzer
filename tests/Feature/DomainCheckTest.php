@@ -35,7 +35,7 @@ class DomainCheckTest extends TestCase
         );
     }
 
-    
+
 
     public function testStore()
     {

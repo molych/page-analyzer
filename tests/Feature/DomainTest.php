@@ -11,7 +11,7 @@ class DomainTest extends TestCase
 {
     /**
      * A domain test.
-     * 
+     *
      * @param  int  Tests\Feature\DomainTest::$id
      * @param string Tests\Feature\DomainTest::$url
      * @return void
@@ -49,8 +49,8 @@ class DomainTest extends TestCase
     /**
      * Display the specified resource.
      *
-     * 
-     * 
+     *
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
 
