@@ -9,15 +9,6 @@ use Illuminate\Support\Facades\Http;
 
 class DomainCheckTest extends TestCase
 {
-
-    /**
-     * A domain check test.
-     *
-     *
-     * @return void
-     */
-
-
     private int $id;
     private string $url = 'http://www.google.com';
 
@@ -34,7 +25,11 @@ class DomainCheckTest extends TestCase
         );
     }
 
-
+     /**
+     * Display the specified resource.
+     *
+     * @return void
+     */
 
     public function testStore()
     {
