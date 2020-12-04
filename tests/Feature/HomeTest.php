@@ -5,13 +5,14 @@ namespace Tests\Feature;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class ExampleTest extends TestCase
+class HomeTest extends TestCase
 {
     /**
-     * A basic test example.
+     * A home test example.
      *
      * @return void
      */
+    
     public function testHome()
     {
         $response = $this->get(route('home'));

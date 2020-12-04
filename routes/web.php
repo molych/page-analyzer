@@ -15,6 +15,12 @@ use App\Http\Controllers\DomainCheckController;
 |
 */
 
+/**
+ * A basic test example.
+ *
+ * @return  \Illuminate\View\View
+ */
+
 Route::get('/', function () {
     return view('index');
 })->name('home');
