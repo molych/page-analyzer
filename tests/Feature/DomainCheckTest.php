@@ -11,11 +11,11 @@ class DomainCheckTest extends TestCase
 {
 
     /**
-     * Display the specified resource.
+     * A domain check test.
      *
-     * @param  int  Tests\Feature\DomainTest::$id
-     * @param string Tests\Feature\DomainTest::$url
-     * @return \Illuminate\Http\RedirectResponse
+     * @param  int  Tests\Feature\DomainCheckTest::$id
+     * @param string Tests\Feature\DomainCheckTest::$url
+     * @return void
      */
 
 
