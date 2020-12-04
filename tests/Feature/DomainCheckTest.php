@@ -13,8 +13,8 @@ class DomainCheckTest extends TestCase
     /**
      * A domain check test.
      *
-     * @param  int  Tests\Feature\DomainCheckTest::$id
-     * @param string Tests\Feature\DomainCheckTest::$url
+     * @param  int  $this->id
+     * @param string $this->url
      * @return void
      */
 

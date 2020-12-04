@@ -48,3 +48,6 @@ test-coverage:
 
 watch:
 	npm run watch;
+
+push:
+	git push origin main;
