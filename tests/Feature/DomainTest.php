@@ -12,7 +12,7 @@ class DomainTest extends TestCase
     /**
      * A domain test.
      *
-     * 
+     *
      * @return void
      */
 
