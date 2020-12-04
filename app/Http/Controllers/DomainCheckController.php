@@ -9,6 +9,13 @@ use DiDom\Document;
 
 class DomainCheckController extends Controller
 {
+      /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+
     public function store($id)
     {
         $domain = DB::table('domains')->find($id);
