@@ -9,6 +9,16 @@ use Illuminate\Support\Facades\Http;
 
 class DomainCheckTest extends TestCase
 {
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  Tests\Feature\DomainTest::$id
+     * @param string Tests\Feature\DomainTest::$url
+     * @return \Illuminate\Http\RedirectResponse
+     */
+
+
     private $id;
     private $url = 'http://www.google.com';
 
@@ -25,14 +35,7 @@ class DomainCheckTest extends TestCase
         );
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @param string $url
-     * @return \Illuminate\Http\RedirectResponse
-     */
-
+    
 
     public function testStore()
     {

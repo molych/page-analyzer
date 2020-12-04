@@ -41,8 +41,8 @@ class DomainTest extends TestCase
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
-     * @param string $url
+     * 
+     * 
      * @return \Illuminate\Http\RedirectResponse
      */
 
