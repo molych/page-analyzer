@@ -47,7 +47,7 @@ class DomainController extends Controller
         $parsedUrl = parse_url($url['name']);
         $parsedUrl = "{$parsedUrl['scheme']}://{$parsedUrl['host']}";
         $lowUrl = strtolower($parsedUrl);
-        $domain = DB::table('domains')->where('name', $lowUrl)->get()->first();
+        $domain = DB::table('domains')->where('name', $lowUrl)->first();
         if ($domain) {
             flash('Domain already exists')->info();
             return redirect()->route('domains.show', $domain->id);
