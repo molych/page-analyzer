@@ -61,10 +61,10 @@ class DomainTest extends TestCase
     {
         $this->domain['name'] = Factory::create()->url;
         $parsedName = parse_url($this->domain['name']);
-        $domain['domain']['name'] = "{$parsedName['scheme']}://{$parsedName['host']}";
-        $response = $this->post(route('domains.store'), $domain);
+        $this->domain['domain']['name'] = "{$parsedName['scheme']}://{$parsedName['host']}";
+        $response = $this->post(route('domains.store'), $this->domain);
         $response->assertSessionHasNoErrors();
         $response->assertStatus(302);
-        $this->assertDatabaseHas('domains', $domain['domain']);
+        $this->assertDatabaseHas('domains', $this->domain['domain']);
     }
 }
