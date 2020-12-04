@@ -15,6 +15,11 @@ use App\Http\Controllers\DomainCheckController;
 |
 */
 
+    /**
+     *
+     *
+     * @return \Illuminate\View\View
+     */
 
 Route::get('/', function () {
     return view('index');
