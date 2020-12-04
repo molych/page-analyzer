@@ -25,6 +25,15 @@ class DomainCheckTest extends TestCase
         );
     }
 
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @param string $url
+     * @return \Illuminate\Http\RedirectResponse
+     */
+
+
     public function testStore()
     {
         $testHtml = file_get_contents(__DIR__ . '/../fixtures/test.html');

@@ -38,6 +38,14 @@ class DomainTest extends TestCase
         $response->assertSee($this->url);
     }
 
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @param string $url
+     * @return \Illuminate\Http\RedirectResponse
+     */
+
     public function testStore()
     {
         $domain['name'] = Factory::create()->url;
