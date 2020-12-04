@@ -3,7 +3,6 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DomainController;
 use App\Http\Controllers\DomainCheckController;
-use Illuminate\View\View;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,8 +15,11 @@ use Illuminate\View\View;
 |
 */
 
+
+
 Route::get('/', function () {
-    return view('index');
+    /** @return Illuminate\View\View*/
+    return  view('index');
 })->name('home');
 
 Route::resource('domains', DomainController::class)->only(['index', 'store', 'show']);
