@@ -18,7 +18,7 @@ use App\Http\Controllers\DomainCheckController;
 
 
 Route::get('/', function () {
-    /** @return Illuminate\View\View*/
+    /** @return \Illuminate\View\View*/
     return  view('index');
 })->name('home');
 
