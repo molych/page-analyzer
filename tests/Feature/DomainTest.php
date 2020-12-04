@@ -16,8 +16,8 @@ class DomainTest extends TestCase
      * @return void
      */
 
-    private $id;
-    private $url = 'http://www.google.com';
+    private int $id;
+    private string $url = 'http://www.google.com';
 
     protected function setUp(): void
     {
@@ -37,6 +37,12 @@ class DomainTest extends TestCase
         $response = $this->get(route('domains.index'));
         $response->assertOk();
     }
+    
+     /**
+     * Display the specified resource.
+     *
+     * @return void
+     */
 
     public function testShow()
     {
@@ -48,9 +54,7 @@ class DomainTest extends TestCase
     /**
      * Display the specified resource.
      *
-     *
-     *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return void
      */
 
     public function testStore()

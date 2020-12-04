@@ -18,8 +18,8 @@ class DomainCheckTest extends TestCase
      */
 
 
-    private $id;
-    private $url = 'http://www.google.com';
+    private int $id;
+    private string $url = 'http://www.google.com';
 
     protected function setUp(): void
     {
